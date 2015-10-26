@@ -9,30 +9,37 @@
 <body>
 
   <h1>The <strong>facebook</strong> Friend Machine</h1>
-
-  <div class="friends">
+  <div ng-app="firstApp" ng-controller="FriendController" class="friends">
     <form class="form-inline searchForm" role="form">
       <div class="form-group">
 
-        <input class="form-control" placeholder="Search Anything About Your Friends">
+        <!-- <input ng-model="searchTerm" class="form-control" placeholder="Search Anything About Your Friends"> -->
         <!-- STEP 5: Get rid of the one above when you uncomment the below-->
-          <!--
-        <input class="form-control" placeholder="Search Name">
-        <input class="form-control" placeholder="Search Location">
-          -->
+          
+        <input ng-model="nameSearch.name" class="form-control" placeholder="Search Name">
+        <input ng-model="locationSearch.current_location.city" class="form-control" placeholder="Search Location">
+          
+        <select ng-options="option.value as option.name for option in sortOptions" ng-model="sortType"></select>
 
-        <select class="input-medium">
-          <option>Name</option>
-          <option>#Friends</option>
-          <option>City</option>
-          <option>State</option>
-          <option>Country</option>
-        </select>
+        <select ng-options="option.value as option.name for option in upOrDown" ng-model="sorter"></select>
 
-        <select class="input-medium">
+
+<!--         <select class="input-medium" ng-model="sorter">
+          <option value="name">Name</option>
+          <option value="numFriends">#Friends</option>
+          <option value="city">City</option>
+          <option value="state">State</option>
+          <option value="Country">Country</option>
+        </select> -->
+
+<!--         <select class="input-medium">
           <option value="+">Descending</option>
           <option value="-">Ascending</option>
-        </select>
+        </select> -->
+
+<!--         <li ng-repeat="friend in friends | filter:nameSearch | filter:locationSearch | orderBy:sortType:sorter"><img ng-src="{{friend.pic_square}}"/> {{ friend.name }} {{ friend.current_location.city }} {{ friend.current_location.state }} {{ friend.current_location.country }} {{ friend.friend_count }} Friends</li> -->
+
+
 
       </div>
     </form>
@@ -53,6 +60,24 @@
 
         <div class="num-friends">
           Friends: 1,367
+        </div>
+      </li>
+      
+      <li class='friend' ng-repeat="friend in friends | filter:nameSearch | filter:locationSearch | orderBy:sortType:sorter">
+        <img class="profile-pic" ng-src="{{friend.pic_square}}">
+
+        <h3>{{ friend.name }} </h3>
+
+        <div class="location">
+          Location: {{ friend.current_location.city }}, {{ friend.current_location.state }}, {{ friend.current_location.country }}
+        </div>
+
+        <div class="status">
+          Status: {{ friend.status.message }} 
+        </div>
+
+        <div class="num-friends">
+          Friends: {{ friend.friend_count }}
         </div>
       </li>
     </ul>
