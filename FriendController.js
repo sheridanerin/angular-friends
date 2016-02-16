@@ -14,8 +14,8 @@ app.controller('FriendController', function($scope) {
 		{name: 'Descending', value: true}
 	];
 
-	$scope.sortType = 'name';
-	$scope.sorter = false;
+	// $scope.sortType = 'name';
+	// $scope.sorter = false;
 
   	$scope.friends = [
   {
